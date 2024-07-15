@@ -1,0 +1,71 @@
+ARENAHO
+193454
+193454
+TSHIBETE2 
+TSHIKANDA
+Vhazwala@gmail.com
+0729792961
+MANGONDI 
+TSHILAPFENE
+TSHIKUNGWI 
+NZHELELE
+0930
+Tshisoleatshitha
+english
+BIRDS
+
+
+
+url=https://petstore.octoperf.com/actions/Catalog.action
+browser=ChromeDriver()
+quantity1=15
+quantity2=29
+quantity3=8
+cardType=MasterCard
+cardNumber=777 9994 5566 3345
+expiryDate=04/26
+username=futhi
+password=12345
+repeatedPassword=12345
+firstName=TSHIBETE2
+lastName=TSHIKANDA
+email=zbongeka@gmail.com
+phone=0731965706
+address1=MANGONDI
+address2=TSHILAPFENE
+city=TSHIKUNGWI
+state=NZHELELE
+zip=0930
+country=Tshisoleatshitha
+languagePreference=english
+favouriteCategoryId=FISH
+
+
+
+
+
+
+
+
+
+
+int i = 2;
+        do {
+            try {
+                // Find the input element for the quantity in each row using relative XPath
+                WebElement quantityInput = driver.findElement(By.xpath("//*[@id=\"Cart\"]/form/table/tbody/tr[" + i + "]/td[5]/input"));
+                quantityInput.clear();
+                quantityInput.sendKeys(userDetails.get("quantity" + (i - 1)));
+            } catch (NoSuchElementException e) {
+                System.out.println("Skipping row " + i + " as it does not contain a quantity input field.");
+            }
+            i++;
+        } while (i < rows.size());
+        // Click the "Update Cart" button
+        WebElement updateCartButton = driver.findElement(By.name("updateCartQuantities"));
+        updateCartButton.click();
+        // Wait for the update to process
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"Cart\"]/form/table/tbody/tr")));
+        // Calculate the total cost
+        double totalCost = 0.0;
